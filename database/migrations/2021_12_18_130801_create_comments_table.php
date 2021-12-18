@@ -15,7 +15,18 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            // どの投稿に結びつくかを指定するカラム
+            // post_idという名前にしておくと、postsテーブルのidカラムにlaravelが紐付けてくれる
+            $table->unsignedBigInteger('post_id');
+            $table->string('body');
             $table->timestamps();
+            $table
+                // postsテーブルに存在しないidを読み込まないよう外部キー制約を用いる
+                ->foreign('post_id')
+                ->references('id')
+                ->on('posts')
+                // postsテーブルで該当レコードが削除されたら、commentsテーブルでも連動してレコード削除
+                ->onDelete('cascade');
         });
     }
 
