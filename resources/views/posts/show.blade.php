@@ -19,12 +19,19 @@
     </h1>
     <p>{!! nl2br(e($post->body)) !!}</p>
 
+    <h2>Comments</h2>
+    <ul>
+        {{-- $post->commentsで該当postに関するすべてのコメントを取得できる --}}
+        @foreach ($post->comments as $comment)
+            <li>{{ $comment->body }}</li>
+        @endforeach
+    </ul>
+
     <script>
         'use strict';
 
         {
             document.querySelector('#delete_post').addEventListener('submit', e => {
-                // e.preventDefault()にて、submitに伴うページ遷移や送信を中止させる
                 e.preventDefault();
 
                 if(!confirm('Sure to delete?')) {
