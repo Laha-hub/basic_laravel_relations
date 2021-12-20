@@ -31,10 +31,10 @@
         </li>
 
         @foreach ($post->comments()->latest()->get() as $comment)
-            {{-- <li>{{ $comment->body }}</li> --}}
             <li>
                 {{ $comment->body }}
-                <form action="" method="post" class="delete-comment">
+                {{-- <form action="" method="post" class="delete-comment"> --}}
+                <form action="{{ route('comments.destroy', $comment) }}" method="post" class="delete-comment">
                     @method('DELETE')
                     @csrf
 
