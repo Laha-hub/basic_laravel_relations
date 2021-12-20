@@ -21,7 +21,6 @@
 
     <h2>Comments</h2>
     <ul>
-        {{-- コメント追加フォーム --}}
         <li>
             <form action="{{ route('comments.store', $post) }}" method="post" class="comment-form">
                 @csrf
