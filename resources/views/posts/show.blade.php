@@ -30,7 +30,9 @@
             </form>
         </li>
 
-        @foreach ($post->comments as $comment)
+        {{-- @foreach ($post->comments as $comment) --}}
+        {{-- コメントを降順に変更 --}}
+        @foreach ($post->comments()->latest()->get() as $comment)
             <li>{{ $comment->body }}</li>
         @endforeach
     </ul>

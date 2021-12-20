@@ -10,6 +10,12 @@ class CommentController extends Controller
 {
     public function store(Request $request, Post $post)
     {
+        // コメント追加時のバリデーション
+        $request->validate([
+            // bodyが空の場合、元の画面にリダイレクトされる
+            'body' => 'required',
+        ]);
+
         $comment = new Comment();
         $comment->post_id = $post->id;
         $comment->body = $request->body;
